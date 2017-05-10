@@ -1,0 +1,32 @@
+{
+  "name": "image-viewer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "eslint": "eslint src/*",
+    "stylelint": "stylelint assets/*",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^0.28.1",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.1.3",
+    "eslint-plugin-import": "^2.2.0",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "node-sass": "^4.5.2",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.17.0",
+    "stylelint": "^7.10.1",
+    "stylelint-config-standard": "^16.0.0",
+    "stylelint-scss": "^1.4.4",
+    "webpack": "^2.5.1"
+  },
+  "dependencies": {
+    "normalize.css": "^7.0.0"
+  }
+}
