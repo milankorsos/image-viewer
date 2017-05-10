@@ -111,6 +111,17 @@ class Template {
       </ul>
     `;
   }
+
+  /**
+   * HTML template for loading message
+   */
+  static message(message = '') {
+    return `
+      <div class="message">
+        ${message}
+      </div>
+    `;
+  }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Template;
 
@@ -140,19 +151,47 @@ class Controller {
   constructor(view) {
     this.view = view;
     this.store = [];
+    this.query = '';
+
+    // Bind actions to UI elements & keyboard events
+    view.bindSearchImage(this.searchImage.bind(this));
+  }
+
+
+  /**
+   * Fetch list of photos from flickr
+   */
+  searchImage(query = '') {
+    this.query = query;
+
+    // Clear results if empty query
+    if (query === '') {
+      this.store = [];
+      this.view.showThumbs(this.store);
+    } else {
+      this.fetchPhotos(query);
+    }
   }
 
   /**
    * Fetch list of photos from flickr
    */
-  fetchPhotos(tags) {
-    __WEBPACK_IMPORTED_MODULE_0__dataService__["a" /* default */].fetchFlickrPhotos(tags)
+  fetchPhotos(query) {
+    this.view.showLoading();
+
+    __WEBPACK_IMPORTED_MODULE_0__dataService__["a" /* default */].fetchFlickrPhotos(query)
       .then((images) => {
-        this.store = images;
-        this.view.showThumbs(this.store);
+        if (query === this.query) {
+          this.store = images;
+
+          if (images.length) {
+            this.view.showThumbs(this.store);
+          } else {
+            this.view.showNoResults();
+          }
+        }
       });
   }
-
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Controller;
 
@@ -169,11 +208,8 @@ class Controller {
 
 class View {
   constructor(template) {
-    this.template = template;
-
     this.$images = document.querySelector('.images');
-    this.$container = document.getElementById('container');
-    this.$body = document.getElementsByTagName('body')[0];
+    this.$searchBar = document.getElementById('search-bar');
   }
 
   /**
@@ -181,6 +217,29 @@ class View {
    */
   showThumbs(items) {
     this.$images.innerHTML = __WEBPACK_IMPORTED_MODULE_0__template__["a" /* default */].thumbnails(items);
+  }
+
+  showLoading() {
+    this.$images.innerHTML = __WEBPACK_IMPORTED_MODULE_0__template__["a" /* default */].message('Loading');
+  }
+
+  showNoResults() {
+    const query = this.$searchBar.value;
+    this.$images.innerHTML = __WEBPACK_IMPORTED_MODULE_0__template__["a" /* default */].message(`No results for ${query}.`);
+  }
+
+  bindSearchImage(action) {
+    View.bindActionToKeyEvent(this.$searchBar, action);
+  }
+
+  /**
+   * @private Bind an action to a keyboard event
+   */
+  static bindActionToKeyEvent(element, action) {
+    const eventListener = (e) => {
+      action(element.value);
+    };
+    element.addEventListener('keyup', eventListener, true);
   }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = View;
@@ -196,23 +255,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalize_css__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_normalize_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_normalize_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controller__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__template__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__view__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__assets_index_scss__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__assets_index_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__assets_index_scss__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__view__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__assets_index_scss__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__assets_index_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__assets_index_scss__);
 /* global window */
 
 
 
 
 
-
-const template = new __WEBPACK_IMPORTED_MODULE_2__template__["a" /* default */]();
-const view = new __WEBPACK_IMPORTED_MODULE_3__view__["a" /* default */](template);
+const view = new __WEBPACK_IMPORTED_MODULE_2__view__["a" /* default */]();
 const controller = new __WEBPACK_IMPORTED_MODULE_1__controller__["a" /* default */](view);
-
-const fetchPhotos = () => controller.fetchPhotos('sunrays');
-window.addEventListener('load', fetchPhotos, true);
 
 
 /***/ }),

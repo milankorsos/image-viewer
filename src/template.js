@@ -38,4 +38,15 @@ export default class Template {
       </ul>
     `;
   }
+
+  /**
+   * HTML template for loading message
+   */
+  static message(message = '') {
+    return `
+      <div class="message">
+        ${message}
+      </div>
+    `;
+  }
 }

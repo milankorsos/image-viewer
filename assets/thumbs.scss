@@ -1,17 +1,38 @@
 .header {
   border-bottom: 2px solid $color-gray;
   font-size: 0.5rem;
-  margin: 0 $thumb-list-margin + $thumb-margin;
+  margin: 0rem $thumb-list-margin + $thumb-margin;
+  padding: 1em 0;
+
+  h1,
+  div,
+  input {
+    display: inline;
+
+    & input {
+      border: 0;
+      border-bottom: 0.1em dotted $color-black;
+      font-size: 1em;
+      height: 2em;
+      left: 0;
+      margin: 0 1em;
+      padding: 0.5em;
+      position: relative;
+      top: -0.2em;
+      width: 20em;
+    }
+  }
 
   @media screen and (min-width: $breakpoint) {
     font-size: 1rem;
   }
 }
 
-.loading {
-  width: 10rem;
-  text-align: center;
+.message {
   margin: 30vh auto;
+  max-width: 80%;
+  min-width: 10rem;
+  text-align: center;
 }
 
 .thumbs-list {

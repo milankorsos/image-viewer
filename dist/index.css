@@ -421,15 +421,34 @@ button {
 .header {
   border-bottom: 2px solid lightgray;
   font-size: 0.5rem;
-  margin: 0 1.4rem; }
+  margin: 0rem 1.4rem;
+  padding: 1em 0; }
+  .header h1,
+  .header div,
+  .header input {
+    display: inline; }
+    .header h1 input,
+    .header div input,
+    .header input input {
+      border: 0;
+      border-bottom: 0.1em dotted black;
+      font-size: 1em;
+      height: 2em;
+      left: 0;
+      margin: 0 1em;
+      padding: 0.5em;
+      position: relative;
+      top: -0.2em;
+      width: 20em; }
   @media screen and (min-width: 32.1rem) {
     .header {
       font-size: 1rem; } }
 
-.loading {
-  width: 10rem;
-  text-align: center;
-  margin: 30vh auto; }
+.message {
+  margin: 30vh auto;
+  max-width: 80%;
+  min-width: 10rem;
+  text-align: center; }
 
 .thumbs-list {
   display: flex;

@@ -3,11 +3,8 @@ import Template from './template';
 
 export default class View {
   constructor(template) {
-    this.template = template;
-
     this.$images = document.querySelector('.images');
-    this.$container = document.getElementById('container');
-    this.$body = document.getElementsByTagName('body')[0];
+    this.$searchBar = document.getElementById('search-bar');
   }
 
   /**
@@ -15,5 +12,28 @@ export default class View {
    */
   showThumbs(items) {
     this.$images.innerHTML = Template.thumbnails(items);
+  }
+
+  showLoading() {
+    this.$images.innerHTML = Template.message('Loading');
+  }
+
+  showNoResults() {
+    const query = this.$searchBar.value;
+    this.$images.innerHTML = Template.message(`No results for ${query}.`);
+  }
+
+  bindSearchImage(action) {
+    View.bindActionToKeyEvent(this.$searchBar, action);
+  }
+
+  /**
+   * @private Bind an action to a keyboard event
+   */
+  static bindActionToKeyEvent(element, action) {
+    const eventListener = (e) => {
+      action(element.value);
+    };
+    element.addEventListener('keyup', eventListener, true);
   }
 }

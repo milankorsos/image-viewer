@@ -1,10 +1,16 @@
 # Image Viewer
 
-## Install dependencies
+## Online
+
+https://milankorsos.github.io/image-viewer
+
+## Local
+
+### Install dependencies
  `$ npm install`
 
-## Build
+### Build
  `$ npm buils`
 
-## Start
+### Start
  Browse index.html
