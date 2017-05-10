@@ -1,0 +1,36 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "HelveticaNeue-Light", Helvetica, Arial, sans-serif;
+  font-weight: $font-weight;
+}
+
+h1 {
+  font-weight: $font-weight;
+}
+
+#container {
+  height: 100vh;
+  margin: auto;
+  max-width: $max-width;
+}
+
+// Reset button style
+button {
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
+}

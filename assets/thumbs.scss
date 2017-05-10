@@ -1,0 +1,36 @@
+.header {
+  border-bottom: 2px solid $color-gray;
+  font-size: 0.5rem;
+  margin: 0 $thumb-list-margin + $thumb-margin;
+
+  @media screen and (min-width: $breakpoint) {
+    font-size: 1rem;
+  }
+}
+
+.loading {
+  width: 10rem;
+  text-align: center;
+  margin: 30vh auto;
+}
+
+.thumbs-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  list-style: none;
+  margin: $thumb-list-margin;
+  padding: 0;
+}
+
+.thumb {
+  background-color: $color-gray;
+  height: $thumb-size-s;
+  margin: $thumb-margin;
+  width: $thumb-size-s;
+
+  @media screen and (min-width: $breakpoint) {
+    height: $thumb-size-m;
+    width: $thumb-size-m;
+  }
+}
