@@ -2,8 +2,8 @@ export default class Template {
   /**
    * HTML template for a single thumbnail
    */
-  static thumb(item, index) {
-    const { thumb, image, title } = item;
+  static thumb(item) {
+    const { thumb, title, views } = item;
 
     return `
       <li class="thumb">
@@ -17,6 +17,7 @@ export default class Template {
           src="${thumb.large}"
           alt="${title}"
         />
+        <div>${views}</div>
      </li>
     `;
   }
@@ -25,12 +26,7 @@ export default class Template {
    * HTML template for the thumbnails
    */
   static thumbnails(items) {
-    let index = 0;
-    const thumbs = items.reduce((tmpl, item) => {
-      const newTmpl = tmpl + Template.thumb(item, index);
-      index += 1;
-      return newTmpl;
-    }, '');
+    const thumbs = items.reduce((tmpl, item) => tmpl + Template.thumb(item), '');
 
     return `
       <ul class="thumbs-list">
@@ -40,7 +36,7 @@ export default class Template {
   }
 
   /**
-   * HTML template for loading message
+   * HTML template for messages
    */
   static message(message = '') {
     return `

@@ -1,7 +1,7 @@
 .header {
   border-bottom: 2px solid $color-gray;
   font-size: 0.5rem;
-  margin: 0rem $thumb-list-margin + $thumb-margin;
+  margin: 0 $thumb-list-margin + $thumb-margin;
   padding: 1em 0;
 
   h1,
@@ -48,7 +48,25 @@
   background-color: $color-gray;
   height: $thumb-size-s;
   margin: $thumb-margin;
+  position: relative;
   width: $thumb-size-s;
+
+  div {
+    align-items: center;
+    display: flex;
+    height: $thumb-size-s;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    text-shadow: 1px 1px 5px $color-white;
+    top: 0;
+    width: $thumb-size-s;
+
+    @media screen and (min-width: $breakpoint) {
+      height: $thumb-size-m;
+      width: $thumb-size-m;
+    }
+  }
 
   @media screen and (min-width: $breakpoint) {
     height: $thumb-size-m;

@@ -1,4 +1,5 @@
 import DataService from './dataService';
+import { debounce } from './helpers';
 
 export default class Controller {
   constructor(view) {
@@ -7,22 +8,23 @@ export default class Controller {
     this.query = '';
 
     // Bind actions to UI elements & keyboard events
-    view.bindSearchImage(this.searchImage.bind(this));
+    const debouncedSearchImage = debounce(this.searchImage.bind(this), 200);
+    view.bindSearchImage(debouncedSearchImage);
   }
-
 
   /**
    * Fetch list of photos from flickr
    */
   searchImage(query = '') {
-    this.query = query;
+    if (query !== this.query) {
+      this.query = query;
 
-    // Clear results if empty query
-    if (query === '') {
-      this.store = [];
-      this.view.showThumbs(this.store);
-    } else {
-      this.fetchPhotos(query);
+      if (query === '') {
+        this.store = [];
+        this.view.showThumbs(this.store);
+      } else {
+        this.fetchPhotos(query);
+      }
     }
   }
 

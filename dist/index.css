@@ -421,7 +421,7 @@ button {
 .header {
   border-bottom: 2px solid lightgray;
   font-size: 0.5rem;
-  margin: 0rem 1.4rem;
+  margin: 0 1.4rem;
   padding: 1em 0; }
   .header h1,
   .header div,
@@ -462,7 +462,22 @@ button {
   background-color: lightgray;
   height: 75px;
   margin: 0.3rem;
+  position: relative;
   width: 75px; }
+  .thumb div {
+    align-items: center;
+    display: flex;
+    height: 75px;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    text-shadow: 1px 1px 5px white;
+    top: 0;
+    width: 75px; }
+    @media screen and (min-width: 32.1rem) {
+      .thumb div {
+        height: 150px;
+        width: 150px; } }
   @media screen and (min-width: 32.1rem) {
     .thumb {
       height: 150px;
